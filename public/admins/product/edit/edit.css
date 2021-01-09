@@ -1,0 +1,11 @@
+.image_feature{
+    width:150px;
+    margin-top:20px;
+}
+.image_detail{
+    width:150px;
+    height:90px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #1d0000;
+}
