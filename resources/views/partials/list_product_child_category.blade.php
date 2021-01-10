@@ -8,42 +8,61 @@
 @else
 @foreach($categoryChild->products as $item)
 
-    <li class="item col-lg-3 col-md-4 col-sm-6 col-xs-6 ">
-        <div class="product-item">
-        <div class="item-inner">
-            <div class="product-thumbnail">
-            <div class="pr-img-area"> <a title="{{ $item->name }}" href="{{ route('detail.products',['slug'=>$item->slug]) }}">
-                <figure> <img class="first-img" src="{{ asset($item->product_image_path) }}" alt=""> <img class="hover-img" src="{{ asset($item->product_image_path) }}" alt=""></figure>
-                </a>
-                <button type="button" class="add-to-cart-mt"> <i class="fa fa-shopping-cart"></i><span> Add to Cart</span> </button>
-            </div>
-            <div class="pr-info-area">
-                <div class="pr-button">
-                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart"></i> </a> </div>
-                <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-signal"></i> </a> </div>
-                <div class="mt-button quick-view"> <a href="quick_view.html"> <i class="fa fa-search"></i> </a> </div>
+<div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
+    <!--Product Start-->
+    <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+        <div class="ht-product-inner">
+            <div class="ht-product-image-wrap">
+                <a href="product-details.html" class="ht-product-image"> <img src="{{ asset($item->product_image_path) }}" alt="Universal Product Style"> </a>
+                <div class="ht-product-action">
+                    <ul>
+                        <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                    </ul>
                 </div>
             </div>
-            </div>
-            <div class="item-info">
-            <div class="info-inner">
-                <div class="item-title"> <a title="{{ $item->name }}" href="{{ route('detail.products',['slug'=>$item->slug]) }}">{{ $item->name }}</a> </div>
-                <div class="item-content">
-                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                <div class="item-price">
-                    <div class="price-box">
-                    <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{ number_format($item->price,0,'',',') }} đ</span> </p>
-                    <?php $price_fake = $item->price + 1000000;
-                        // dd($price_fake)
-                    ?>
-                    {{-- <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{ number_format($price_fake,0,'',',') }} đ</span> </p> --}}
+            <div class="ht-product-content">
+                <div class="ht-product-content-inner">
+                    <div class="ht-product-categories"><a href="#">Chair</a></div>
+                    <h4 class="ht-product-title"><a href="product-details.html">{{ $item->name }}</a></h4>
+                    <div class="ht-product-price">
+                        <span class="new">{{ number_format($item->price,0,'',',') }}</span>
+                        <span class="old">$80.00</span>
+                    </div>
+                    <div class="ht-product-ratting-wrap">
+                        <span class="ht-product-ratting">
+                            <span class="ht-product-user-ratting" style="width: 100%;">
+                                <i class="sli sli-star"></i>
+                                <i class="sli sli-star"></i>
+                                <i class="sli sli-star"></i>
+                                <i class="sli sli-star"></i>
+                                <i class="sli sli-star"></i>
+                            </span>
+                        <i class="sli sli-star"></i>
+                        <i class="sli sli-star"></i>
+                        <i class="sli sli-star"></i>
+                        <i class="sli sli-star"></i>
+                        <i class="sli sli-star"></i>
+                        </span>
                     </div>
                 </div>
+                <div class="ht-product-action">
+                    <ul>
+                        <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                    </ul>
+                </div>
+                <div class="ht-product-countdown-wrap">
+                    <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
                 </div>
             </div>
-            </div>
         </div>
-        </div>
-    </li>
+    </div>
+    <!--Product End-->
+</div>
     @endforeach
 @endif
