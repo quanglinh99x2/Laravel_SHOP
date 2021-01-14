@@ -20,11 +20,24 @@ class AdminLogin
     {
         // return $next($request);
         if(Auth::check()){
+            $check = 0;
+            foreach(Auth::user()->roles as $item){
+                // dd($item);
+                if($item->name == "guest"){
+                    $check =1;
+                }
+            }
+            if($check == 1){
+                Auth::logout();
+                return redirect('/admin')->with('notification','Tài khoản khách không được truy cập !');
 
-            return $next($request);
+            }
+            else{
+                return $next($request);
+            }
         }
         else{
-            return redirect('admin');
+            return redirect('/admin');
         }
 
     }

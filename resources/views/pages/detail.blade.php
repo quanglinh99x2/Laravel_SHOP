@@ -7,699 +7,741 @@
 @endsection
 @section('content')
 
-<div class="breadcrumbs">
+<div class="breadcrumb-area pt-35 pb-35 bg-gray">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <ul>
-                    <li class="home"> <a title="Go to Home Page"
-                            href="{{ route('home.index') }}">Home</a><span>&raquo;</span></li>
-                    <li><strong>{{ $product->name }}</strong></li>
-                </ul>
-            </div>
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="active">Product Details </li>
+            </ul>
         </div>
     </div>
 </div>
-<!-- Breadcrumbs End -->
-<!-- Main Container -->
-<div class="main-container col1-layout">
+<div class="product-details-area pt-100 pb-95">
     <div class="container">
         <div class="row">
-            <div class="col-main">
-                <div class="product-view-area">
-                    <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
-                        <div class="icon-sale-label sale-left">Sale</div>
-                        <div class="large-image">
-                            <a href="{{ asset($product->product_image_path) }}" class="cloud-zoom" id="zoom1"
-                                rel="useWrapper: false, adjustY:0, adjustX:20">
-                                <img class="zoom-img" src="{{ asset($product->product_image_path) }}" alt="products">
+            <div class="col-lg-6 col-md-6">
+                <div class="product-details-img">
+                    <div class="zoompro-border zoompro-span">
+                        <img class="zoompro" src="{{ asset($product->product_image_path) }}" data-zoom-image="{{ asset($product->product_image_path) }}" alt=""/>           <span>-29%</span>
+                        <div class="product-video">
+                            <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
+                                <i class="sli sli-control-play"></i>
+                                View Video
                             </a>
                         </div>
-                        <div class="flexslider flexslider-thumb">
-                            <ul class="previews-list slides"
-                                style="width: 1000%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                                @foreach ($product->product_images as $item)
-                                <li style="width: 100px; float: left; display: block;">
-                                    <a href='{{ asset($item->image_path) }}' class='cloud-zoom-gallery'
-                                        rel="useZoom: 'zoom1', smallImage: '{{ asset($item->image_path) }}' ">
-                                        <img src="{{ asset($item->image_path) }}" alt="Thumbnail 2" />
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
+                    </div>
+                    <div id="gallery" class="mt-20 product-dec-slider">
+                        <a data-image="{{ asset($product->product_image_path) }}" data-zoom-image="{{ asset($product->product_image_path) }}">
+                            <img src="{{ asset($product->product_image_path) }}" alt="">
+                        </a>
+                        @foreach ($product->product_images as $imgPro)
+                            <a data-image="{{ asset($imgPro->image_path) }}" data-zoom-image="{{ asset($imgPro->image_path) }}">
+                                <img src="{{ asset($imgPro->image_path) }}" alt="">
+                            </a>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product-details-content ml-30">
+                    <h2>{{ $product->name }}</h2>
+                    <div class="product-details-price">
+                        <span>{{ number_format($product->price,0,'',',') }} đ</span>
+                        <span class="old">{{ number_format(($product->price + 1000000),0,'',',') }} đ</span>
+                    </div>
+                    <div class="pro-details-rating-wrap">
+                        <div class="pro-details-rating">
+                            <i class="sli sli-star yellow"></i>
+                            <i class="sli sli-star yellow"></i>
+                            <i class="sli sli-star yellow"></i>
+                            <i class="sli sli-star yellow"></i>
+                            <i class="sli sli-star yellow"></i>
                         </div>
-                        <ul class="flex-direction-nav">
-                            <li><a class="flex-prev flex-disabled" href="#" tabindex="-1"></a></li>
-                            <li><a class="flex-next" href="#"></a></li>
+                        <span><a href="#">3 Reviews</a></span>
+                    </div>
+                    {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p> --}}
+                    <div class="pro-details-list">
+                        <ul>
+                            <li>- 0.5 mm Dail</li>
+                            <li>- Inspired vector icons</li>
+                            <li>- Very modern style  </li>
                         </ul>
-                        <!-- end: more-images -->
-
                     </div>
-                    <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7 product-details-area">
-
-                        <div class="product-name">
-                            <h1>{{ $product->name }}</h1>
-                        </div>
-                        <div class="price-box">
-                            <p class="special-price"> <span class="price-label">Special Price</span> <span
-                                    class="price"> {{ number_format($product->price,0,'',',') }} đ</span> </p>
-                            {{-- <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">
-                                    $359.99 </span> </p> --}}
-                        </div>
-                        <div class="ratings">
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                            </div>
-                            <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a
-                                    href="#">Add Your Review</a> </p>
-                            <p class="availability in-stock pull-right">Tình trạng: <span>Còn hàng</span></p>
-                        </div>
-
-                        {{-- <div class="product-color-size-area">
-                            <div class="color-area">
-                                <h2 class="saider-bar-title">Color</h2>
-                                <div class="color">
-                                    <ul>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div> --}}
-                        <div class="product-variation">
-                            <form action="#" method="post">
-                                <div class="cart-plus-minus">
-                                    <label for="qty">Quantity:</label>
-                                    <div class="numbers-row">
-                                        <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;"
-                                            class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
-                                        <input type="number" class="qty" title="Qty" value="1" min="1" maxlength="12" id="qty"
-                                            name="qty">
-                                        <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;"
-                                            class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
-                                    </div>
-                                </div>
-                                <button class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i
-                                            class="fa fa-shopping-cart"></i>Thêm giỏ hàng</span></button>
-                            </form>
-                        </div>
-                        <div class="product-cart-option">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-heart"></i><span>Add to Wishlist</span></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i><span>Add to Compare</span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i><span>Email to a Friend</span></a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-overview-tab">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="product-tab-inner">
-                                <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                                    <li class="active"> <a href="#description" data-toggle="tab"> Description </a> </li>
-                                    <li> <a href="#reviews" data-toggle="tab">Reviews</a> </li>
-                                    <li><a href="#product_tags" data-toggle="tab">Tags</a></li>
-                                    <li> <a href="#custom_tabs" data-toggle="tab">Custom Tab</a> </li>
+                    <div class="pro-details-size-color">
+                        <div class="pro-details-color-wrap">
+                            <span>Color</span>
+                            <div class="pro-details-color-content">
+                                <ul>
+                                    <li class="blue"></li>
+                                    <li class="maroon active"></li>
+                                    <li class="gray"></li>
+                                    <li class="green"></li>
+                                    <li class="yellow"></li>
                                 </ul>
-                                <div id="productTabContent" class="tab-content">
-                                    <div class="tab-pane fade in active" id="description">
-                                        <div>
-                                            {!! $product->content !!}
-                                        </div>
-                                    </div>
-
-
-                                    <div id="reviews" class="tab-pane fade">
-                                        <div class="col-sm-5 col-lg-5 col-md-5">
-                                            <div class="reviews-content-left">
-                                                <h2>Customer Reviews</h2>
-                                                <div class="review-ratting">
-                                                    <p><a href="#">Amazing</a> Review by Company</p>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th>Price</th>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Value</th>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Quality</th>
-                                                                <td>
-                                                                    <div class="rating"> <i class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star-o"></i> <i
-                                                                            class="fa fa-star-o"></i> </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <p class="author">
-                                                        Angela Mack<small> (Posted on 16/12/2015)</small>
-                                                    </p>
-                                                </div>
-
-
-                                                <div class="review-ratting">
-                                                    <p><a href="#">Good!!!!!</a> Review by Company</p>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th>Price</th>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Value</th>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Quality</th>
-                                                                <td>
-                                                                    <div class="rating"> <i class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star-o"></i> <i
-                                                                            class="fa fa-star-o"></i> </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <p class="author">
-                                                        Lifestyle<small> (Posted on 20/12/2015)</small>
-                                                    </p>
-                                                </div>
-
-
-                                                <div class="review-ratting">
-                                                    <p><a href="#">Excellent</a> Review by Company</p>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th>Price</th>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Value</th>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Quality</th>
-                                                                <td>
-                                                                    <div class="rating"> <i class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star"></i> <i
-                                                                            class="fa fa-star-o"></i> <i
-                                                                            class="fa fa-star-o"></i> </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <p class="author">
-                                                        Jone Deo<small> (Posted on 25/12/2015)</small>
-                                                    </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7 col-lg-7 col-md-7">
-                                            <div class="reviews-content-right">
-                                                <h2>Write Your Own Review</h2>
-                                                <form>
-                                                    <h3>You're reviewing: <span>Donec Ac Tempus</span></h3>
-                                                    <h4>How do you rate this product?<em>*</em></h4>
-                                                    <div class="table-responsive reviews-table">
-                                                        <table>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>1 star</th>
-                                                                    <th>2 stars</th>
-                                                                    <th>3 stars</th>
-                                                                    <th>4 stars</th>
-                                                                    <th>5 stars</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Quality</td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Price</td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Value</td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                    <td><input type="radio"></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="form-area">
-                                                        <div class="form-element">
-                                                            <label>Nickname <em>*</em></label>
-                                                            <input type="text">
-                                                        </div>
-                                                        <div class="form-element">
-                                                            <label>Summary of Your Review <em>*</em></label>
-                                                            <input type="text">
-                                                        </div>
-                                                        <div class="form-element">
-                                                            <label>Review <em>*</em></label>
-                                                            <textarea></textarea>
-                                                        </div>
-                                                        <div class="buttons-set">
-                                                            <button class="button submit" title="Submit Review"
-                                                                type="submit"><span><i class="fa fa-thumbs-up"></i>
-                                                                    &nbsp;Review</span></button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="product_tags">
-                                        <div class="box-collateral box-tags">
-                                            <div class="tags">
-
-
-                                                <form id="addTagForm" action="#" method="get">
-                                                    <div class="form-add-tags">
-
-
-                                                        <div class="input-box"><label for="productTagName">Add Your
-                                                                Tags:</label>
-                                                            <input class="input-text" name="productTagName"
-                                                                id="productTagName" type="text">
-                                                            <button type="button" title="Add Tags"
-                                                                class="button add-tags"><i class="fa fa-plus"></i>
-                                                                &nbsp;<span>Add Tags</span> </button>
-                                                        </div>
-                                                        <!--input-box-->
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <!--tags-->
-                                            <p class="note">Use spaces to separate tags. Use single quotes (') for
-                                                phrases.</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="custom_tabs">
-                                        <div class="product-tabs-content-inner clearfix">
-                                            <p><strong>Lorem Ipsum</strong><span>&nbsp;is
-                                                    simply dummy text of the printing and typesetting industry. Lorem
-                                                    Ipsum
-                                                    has been the industry's standard dummy text ever since the 1500s,
-                                                    when
-                                                    an unknown printer took a galley of type and scrambled it to make a
-                                                    type
-                                                    specimen book. It has survived not only five centuries, but also the
-                                                    leap into electronic typesetting, remaining essentially unchanged.
-                                                    It
-                                                    was popularised in the 1960s with the release of Letraset sheets
-                                                    containing Lorem Ipsum passages, and more recently with desktop
-                                                    publishing software like Aldus PageMaker including versions of Lorem
-                                                    Ipsum.</span></p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+                        {{-- <div class="pro-details-size">
+                            <span>Size</span>
+                            <div class="pro-details-size-content">
+                                <ul>
+                                    <li><a href="#">s</a></li>
+                                    <li><a href="#">m</a></li>
+                                    <li><a href="#">l</a></li>
+                                    <li><a href="#">xl</a></li>
+                                    <li><a href="#">xxl</a></li>
+                                </ul>
+                            </div>
+                        </div> --}}
+                    </div>
+                    <div class="pro-details-quality">
+                    <form action="{{ route('cart.add_cart_ajax') }}" method="post">
+                        @csrf
+                        <div class="cart-plus-minus">
+                            <input  class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
+                        </div>
+                        <div class="pro-details-cart btn-hover">
+                            <a class="pro-add-to-cart" id-pro="{{ $product->id }}" url-temp="{{ route('cart.add_multi_to_cart') }}" href="#">Add To Cart</a>
+                        </div>
+                    </form>
+                        <div class="pro-details-wishlist">
+                            <a title="Add To Wishlist" href="#"><i class="sli sli-heart"></i></a>
+                        </div>
+                        <div class="pro-details-compare">
+                            <a title="Add To Compare" href="#"><i class="sli sli-refresh"></i></a>
+                        </div>
+                    </div>
+                    <div class="pro-details-meta">
+                        <span>Categories :</span>
+                        <ul>
+                            <li><a href="#">Minimal,</a></li>
+                            <li><a href="#">Furniture,</a></li>
+                            <li><a href="#">Fashion</a></li>
+                        </ul>
+                    </div>
+                    <div class="pro-details-meta">
+                        <span>Tag :</span>
+                        <ul>
+                            <li><a href="#">Fashion, </a></li>
+                            <li><a href="#">Furniture,</a></li>
+                            <li><a href="#">Electronic</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-<!-- Main Container End -->
-
-
-
-<!-- Related Product Slider -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="related-product-area">
-                <div class="page-header">
-                    <h2>Related Products</h2>
-                </div>
-                <div class="related-products-pro">
-                    <div class="slider-items-products">
-                        <div id="related-product-slider" class="product-flexslider hidden-buttons">
-                            <div class="slider-items slider-width-col4 fadeInUp">
-                                <div class="product-item">
-                                    <div class="item-inner fadeInUp">
-                                        <div class="product-thumbnail">
-                                            <div class="icon-sale-label sale-left">Sale</div>
-                                            <div class="icon-new-label new-right">New</div>
-                                            <div class="pr-img-area"> <img class="first-img"
-                                                    src="quanglinhstore/images/products/img12.jpg" alt=""> <img
-                                                    class="hover-img" src="quanglinhstore/images/products/img12.jpg"
-                                                    alt="">
-                                                <button type="button" class="add-to-cart-mt"> <i
-                                                        class="fa fa-shopping-cart"></i><span> Add to Cart</span>
-                                                </button>
+<div class="description-review-area pb-95">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="description-review-wrapper">
+                    <div class="description-review-topbar nav">
+                        <a class="active" data-toggle="tab" href="#des-details1">Description</a>
+                        <a data-toggle="tab" href="#des-details3">Additional information</a>
+                        <a data-toggle="tab" href="#des-details2">Reviews (3)</a>
+                    </div>
+                    <div class="tab-content description-review-bottom">
+                        <div id="des-details1" class="tab-pane active">
+                            <div class="product-description-wrapper">
+                               {!! $product->content !!}
+                            </div>
+                        </div>
+                        <div id="des-details3" class="tab-pane">
+                            <div class="product-anotherinfo-wrapper">
+                                <ul>
+                                    <li><span>Weight</span> 400 g</li>
+                                    <li><span>Dimensions</span>10 x 10 x 15 cm </li>
+                                    <li><span>Materials</span> 60% cotton, 40% polyester</li>
+                                    <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="des-details2" class="tab-pane">
+                            <div class="review-wrapper">
+                                <div class="single-review">
+                                    <div class="review-img">
+                                        <img src="{{ asset('parlo/assets/img/product-details/client-1.jpg') }}" alt="">
+                                    </div>
+                                    <div class="review-content">
+                                        <p>“In convallis nulla et magna congue convallis. Donec eu nunc vel justo maximus posuere. Sed viverra nunc erat, a efficitur nibh”</p>
+                                        <div class="review-top-wrap">
+                                            <div class="review-name">
+                                                <h4>Stella McGee</h4>
                                             </div>
-                                            <div class="pr-info-area">
-                                                <div class="pr-button">
-                                                    <div class="mt-button add_to_wishlist"> <a href="wishlist.html">
-                                                            <i class="fa fa-heart"></i> </a> </div>
-                                                    <div class="mt-button add_to_compare"> <a href="compare.html">
-                                                            <i class="fa fa-signal"></i> </a> </div>
-                                                    <div class="mt-button quick-view"> <a href="quick_view.html"> <i
-                                                                class="fa fa-search"></i> </a> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title"> <a title="Ipsums Dolors Untra"
-                                                        href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                <div class="item-content">
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                            class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span
-                                                                    class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                </div>
+                                            <div class="review-rating">
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-item">
-                                    <div class="item-inner fadeInUp">
-                                        <div class="product-thumbnail">
-                                            <div class="icon-sale-label sale-left">Sale</div>
-                                            <div class="pr-img-area"> <img class="first-img"
-                                                    src="quanglinhstore/images/products/img15.jpg" alt=""> <img
-                                                    class="hover-img" src="quanglinhstore/images/products/img15.jpg"
-                                                    alt="">
-                                                <button type="button" class="add-to-cart-mt"> <i
-                                                        class="fa fa-shopping-cart"></i><span> Add to Cart</span>
-                                                </button>
+                                <div class="single-review">
+                                    <div class="review-img">
+                                        <img src="{{ asset('parlo/assets/img/product-details/client-2.jpg') }}" alt="">
+                                    </div>
+                                    <div class="review-content">
+                                        <p>“In convallis nulla et magna congue convallis. Donec eu nunc vel justo maximus posuere. Sed viverra nunc erat, a efficitur nibh”</p>
+                                        <div class="review-top-wrap">
+                                            <div class="review-name">
+                                                <h4>Stella McGee</h4>
                                             </div>
-                                            <div class="pr-info-area">
-                                                <div class="pr-button">
-                                                    <div class="mt-button add_to_wishlist"> <a href="wishlist.html">
-                                                            <i class="fa fa-heart"></i> </a> </div>
-                                                    <div class="mt-button add_to_compare"> <a href="compare.html">
-                                                            <i class="fa fa-signal"></i> </a> </div>
-                                                    <div class="mt-button quick-view"> <a href="quick_view.html"> <i
-                                                                class="fa fa-search"></i> </a> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title"> <a title="Ipsums Dolors Untra"
-                                                        href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                <div class="item-content">
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i
-                                                            class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special
-                                                                    Price</span> <span class="price"> $456.00 </span>
-                                                            </p>
-                                                            <p class="old-price"> <span class="price-label">Regular
-                                                                    Price:</span> <span class="price"> $567.00
-                                                                </span> </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="review-rating">
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-item">
-                                    <div class="item-inner fadeInUp">
-                                        <div class="product-thumbnail">
-                                            <div class="pr-img-area"> <img class="first-img"
-                                                    src="quanglinhstore/images/products/img03.jpg" alt=""> <img
-                                                    class="hover-img" src="quanglinhstore/images/products/img03.jpg"
-                                                    alt="">
-                                                <button type="button" class="add-to-cart-mt"> <i
-                                                        class="fa fa-shopping-cart"></i><span> Add to Cart</span>
-                                                </button>
-                                            </div>
-                                            <div class="pr-info-area">
-                                                <div class="pr-button">
-                                                    <div class="mt-button add_to_wishlist"> <a href="wishlist.html">
-                                                            <i class="fa fa-heart"></i> </a> </div>
-                                                    <div class="mt-button add_to_compare"> <a href="compare.html">
-                                                            <i class="fa fa-signal"></i> </a> </div>
-                                                    <div class="mt-button quick-view"> <a href="quick_view.html"> <i
-                                                                class="fa fa-search"></i> </a> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title"> <a title="Ipsums Dolors Untra"
-                                                        href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                <div class="item-content">
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i
-                                                            class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special
-                                                                    Price</span> <span class="price"> $456.00 </span>
-                                                            </p>
-                                                            <p class="old-price"> <span class="price-label">Regular
-                                                                    Price:</span> <span class="price"> $567.00
-                                                                </span> </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="single-review">
+                                    <div class="review-img">
+                                        <img src="{{ asset('parlo/assets/img/product-details/client-3.jpg') }}" alt="">
                                     </div>
-                                </div>
-                                <div class="product-item">
-                                    <div class="item-inner fadeInUp">
-                                        <div class="product-thumbnail">
-                                            <div class="pr-img-area"> <img class="first-img"
-                                                    src="quanglinhstore/images/products/img04.jpg" alt=""> <img
-                                                    class="hover-img" src="quanglinhstore/images/products/img04.jpg"
-                                                    alt="">
-                                                <button type="button" class="add-to-cart-mt"> <i
-                                                        class="fa fa-shopping-cart"></i><span> Add to Cart</span>
-                                                </button>
+                                    <div class="review-content">
+                                        <p>“In convallis nulla et magna congue convallis. Donec eu nunc vel justo maximus posuere. Sed viverra nunc erat, a efficitur nibh”</p>
+                                        <div class="review-top-wrap">
+                                            <div class="review-name">
+                                                <h4>Stella McGee</h4>
                                             </div>
-                                            <div class="pr-info-area">
-                                                <div class="pr-button">
-                                                    <div class="mt-button add_to_wishlist"> <a href="wishlist.html">
-                                                            <i class="fa fa-heart"></i> </a> </div>
-                                                    <div class="mt-button add_to_compare"> <a href="compare.html">
-                                                            <i class="fa fa-signal"></i> </a> </div>
-                                                    <div class="mt-button quick-view"> <a href="quick_view.html"> <i
-                                                                class="fa fa-search"></i> </a> </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title"> <a title="Ipsums Dolors Untra"
-                                                        href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                <div class="item-content">
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i
-                                                            class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span
-                                                                    class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item">
-                                    <div class="item-inner fadeInUp">
-                                        <div class="product-thumbnail">
-                                            <div class="pr-img-area"> <img class="first-img"
-                                                    src="quanglinhstore/images/products/img05.jpg" alt=""> <img
-                                                    class="hover-img" src="quanglinhstore/images/products/img05.jpg"
-                                                    alt="">
-                                                <button type="button" class="add-to-cart-mt"> <i
-                                                        class="fa fa-shopping-cart"></i><span> Add to Cart</span>
-                                                </button>
-                                            </div>
-                                            <div class="pr-info-area">
-                                                <div class="pr-button">
-                                                    <div class="mt-button add_to_wishlist"> <a href="wishlist.html">
-                                                            <i class="fa fa-heart"></i> </a> </div>
-                                                    <div class="mt-button add_to_compare"> <a href="compare.html">
-                                                            <i class="fa fa-signal"></i> </a> </div>
-                                                    <div class="mt-button quick-view"> <a href="quick_view.html"> <i
-                                                                class="fa fa-search"></i> </a> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title"> <a title="Ipsums Dolors Untra"
-                                                        href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                <div class="item-content">
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i
-                                                            class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special
-                                                                    Price</span> <span class="price"> $456.00 </span>
-                                                            </p>
-                                                            <p class="old-price"> <span class="price-label">Regular
-                                                                    Price:</span> <span class="price"> $567.00
-                                                                </span> </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item">
-                                    <div class="item-inner fadeInUp">
-                                        <div class="product-thumbnail">
-                                            <div class="pr-img-area"> <img class="first-img"
-                                                    src="quanglinhstore/images/products/img06.jpg" alt=""> <img
-                                                    class="hover-img" src="quanglinhstore/images/products/img06.jpg"
-                                                    alt="">
-                                                <button type="button" class="add-to-cart-mt"> <i
-                                                        class="fa fa-shopping-cart"></i><span> Add to Cart</span>
-                                                </button>
-                                            </div>
-                                            <div class="pr-info-area">
-                                                <div class="pr-button">
-                                                    <div class="mt-button add_to_wishlist"> <a href="wishlist.html">
-                                                            <i class="fa fa-heart"></i> </a> </div>
-                                                    <div class="mt-button add_to_compare"> <a href="compare.html">
-                                                            <i class="fa fa-signal"></i> </a> </div>
-                                                    <div class="mt-button quick-view"> <a href="quick_view.html"> <i
-                                                                class="fa fa-search"></i> </a> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-info">
-                                            <div class="info-inner">
-                                                <div class="item-title"> <a title="Ipsums Dolors Untra"
-                                                        href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                <div class="item-content">
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i
-                                                            class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span
-                                                                    class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                </div>
+                                            <div class="review-rating">
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
+                                                <i class="sli sli-star"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="ratting-form-wrapper">
+                                <span>Add a Review</span>
+                                <p>Your email address will not be published. Required fields are marked <span>*</span></p>
+                                <div class="star-box-wrap">
+                                    <div class="single-ratting-star">
+                                        <i class="sli sli-star"></i>
+                                    </div>
+                                    <div class="single-ratting-star">
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                    </div>
+                                    <div class="single-ratting-star">
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                    </div>
+                                    <div class="single-ratting-star">
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                    </div>
+                                    <div class="single-ratting-star">
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                        <i class="sli sli-star"></i>
+                                    </div>
+                                </div>
+                                <div class="ratting-form">
+                                    <form action="#">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="rating-form-style mb-20">
+                                                    <label>Your review <span>*</span></label>
+                                                    <textarea name="Your Review"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="rating-form-style mb-20">
+                                                   <label>Name <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="rating-form-style mb-20">
+                                                   <label>Email <span>*</span></label>
+                                                    <input type="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-submit">
+                                                    <input type="submit" value="Submit">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="pro-dec-banner">
+                    <a href="#"><img src="{{ asset('parlo/assets/img/banner/banner-15.png') }}" alt=""></a>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div class="product-area pb-70">
+    <div class="container">
+        <div class="section-title text-center pb-60">
+            <h2>Related products</h2>
+            <p> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical</p>
+        </div>
+        <div class="arrivals-wrap scroll-zoom">
+            <div class="ht-products product-slider-active owl-carousel">
+                <!--Product Start-->
+                <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+                    <div class="ht-product-inner">
+                        <div class="ht-product-image-wrap">
+                            <a href="product-details.html" class="ht-product-image"> <img src="parlo/assets/img/product/product-5.jpg" alt="Universal Product Style"> </a>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ht-product-content">
+                            <div class="ht-product-content-inner">
+                                <div class="ht-product-categories"><a href="#">Clock</a></div>
+                                <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
+                                <div class="ht-product-price">
+                                    <span class="new">$60.00</span>
+                                </div>
+                                <div class="ht-product-ratting-wrap">
+                                    <span class="ht-product-ratting">
+                                        <span class="ht-product-user-ratting" style="width: 100%;">
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                        </span>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="ht-product-countdown-wrap">
+                                <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Product End-->
+                <!--Product Start-->
+                <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+                    <div class="ht-product-inner">
+                        <div class="ht-product-image-wrap">
+                            <a href="product-details.html" class="ht-product-image"> <img src="{{ asset('parlo/assets/img/product/product-6.jpg') }}" alt="Universal Product Style"> </a>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ht-product-content">
+                            <div class="ht-product-content-inner">
+                                <div class="ht-product-categories"><a href="#">Lamp </a></div>
+                                <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
+                                <div class="ht-product-price">
+                                    <span class="new">$50.00</span>
+                                    <span class="old">$80.00</span>
+                                </div>
+                                <div class="ht-product-ratting-wrap">
+                                    <span class="ht-product-ratting">
+                                        <span class="ht-product-user-ratting" style="width: 90%;">
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                        </span>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="ht-product-countdown-wrap">
+                                <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Product End-->
+                <!--Product Start-->
+                <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+                    <div class="ht-product-inner">
+                        <div class="ht-product-image-wrap">
+                            <a href="product-details.html" class="ht-product-image"> <img src="{{ asset('parlo/assets/img/product/product-7.jpg') }}" alt="Universal Product Style"> </a>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ht-product-content">
+                            <div class="ht-product-content-inner">
+                                <div class="ht-product-categories"><a href="#">Chair</a></div>
+                                <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
+                                <div class="ht-product-price">
+                                    <span class="new">$30.00</span>
+                                </div>
+                                <div class="ht-product-ratting-wrap">
+                                    <span class="ht-product-ratting">
+                                        <span class="ht-product-user-ratting" style="width: 100%;">
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                        </span>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="ht-product-countdown-wrap">
+                                <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Product End-->
+                <!--Product Start-->
+                <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+                    <div class="ht-product-inner">
+                        <div class="ht-product-image-wrap">
+                            <a href="product-details.html" class="ht-product-image"> <img src="{{ asset('parlo/assets/img/product/product-8.jpg') }}" alt="Universal Product Style"> </a>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ht-product-content">
+                            <div class="ht-product-content-inner">
+                                <div class="ht-product-categories"><a href="#">Chair</a></div>
+                                <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
+                                <div class="ht-product-price">
+                                    <span class="new">$60.00</span>
+                                    <span class="old">$90.00</span>
+                                </div>
+                                <div class="ht-product-ratting-wrap">
+                                    <span class="ht-product-ratting">
+                                        <span class="ht-product-user-ratting" style="width: 100%;">
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                        </span>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="ht-product-countdown-wrap">
+                                <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Product End-->
+                <!--Product Start-->
+                <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
+                    <div class="ht-product-inner">
+                        <div class="ht-product-image-wrap">
+                            <a href="product-details.html" class="ht-product-image"> <img src="{{ asset('parlo/assets/img/product/product-6.jpg') }}" alt="Universal Product Style"> </a>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ht-product-content">
+                            <div class="ht-product-content-inner">
+                                <div class="ht-product-categories"><a href="#">Lamp </a></div>
+                                <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
+                                <div class="ht-product-price">
+                                    <span class="new">$50.00</span>
+                                    <span class="old">$80.00</span>
+                                </div>
+                                <div class="ht-product-ratting-wrap">
+                                    <span class="ht-product-ratting">
+                                        <span class="ht-product-user-ratting" style="width: 90%;">
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                            <i class="sli sli-star"></i>
+                                        </span>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ht-product-action">
+                                <ul>
+                                    <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
+                                    <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
+                                    <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
+                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="ht-product-countdown-wrap">
+                                <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Product End-->
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Related Product Slider End -->
-    @endsection
-    @section('js')
-    <script src="{{ asset('quanglinhstore/js/cloud-zoom.js') }}">
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $(".mega-menu-category").css("display", "none");
-        });
-    </script>
-    @endsection
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="tab-content quickview-big-img">
+                            <div id="pro-1" class="tab-pane fade show active">
+                                <img src="{{ asset('parlo/assets/img/product/quickview-l1.jpg') }}" alt="">
+                            </div>
+                            <div id="pro-2" class="tab-pane fade">
+                                <img src="{{ asset('parlo/assets/img/product/quickview-l2.jpg') }}" alt="">
+                            </div>
+                            <div id="pro-3" class="tab-pane fade">
+                                <img src="{{ asset('parlo/assets/img/product/quickview-l3.jpg') }}" alt="">
+                            </div>
+                            <div id="pro-4" class="tab-pane fade">
+                                <img src="{{ asset('parlo/assets/img/product/quickview-l2.jpg') }}" alt="">
+                            </div>
+                        </div>
+                        <!-- Thumbnail Large Image End -->
+                        <!-- Thumbnail Image End -->
+                        <div class="quickview-wrap mt-15">
+                            <div class="quickview-slide-active owl-carousel nav nav-style-2" role="tablist">
+                                <a class="active" data-toggle="tab" href="#pro-1"><img src="{{ asset('parlo/assets/img/product/quickview-s1.jpg') }}" alt=""></a>
+                                <a data-toggle="tab" href="#pro-2"><img src="{{ asset('parlo/assets/img/product/quickview-s2.jpg') }}" alt=""></a>
+                                <a data-toggle="tab" href="#pro-3"><img src="{{ asset('parlo/assets/img/product/quickview-s3.jpg') }}" alt=""></a>
+                                <a data-toggle="tab" href="#pro-4"><img src="{{ asset('parlo/assets/img/product/quickview-s2.jpg') }}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="product-details-content quickview-content">
+                            <h2>Products Name Here</h2>
+                            <div class="product-details-price">
+                                <span>$18.00 </span>
+                                <span class="old">$20.00 </span>
+                            </div>
+                            <div class="pro-details-rating-wrap">
+                                <div class="pro-details-rating">
+                                    <i class="sli sli-star yellow"></i>
+                                    <i class="sli sli-star yellow"></i>
+                                    <i class="sli sli-star yellow"></i>
+                                    <i class="sli sli-star"></i>
+                                    <i class="sli sli-star"></i>
+                                </div>
+                                <span>3 Reviews</span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p>
+                            <div class="pro-details-list">
+                                <ul>
+                                    <li>- 0.5 mm Dail</li>
+                                    <li>- Inspired vector icons</li>
+                                    <li>- Very modern style  </li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-size-color">
+                                <div class="pro-details-color-wrap">
+                                    <span>Color</span>
+                                    <div class="pro-details-color-content">
+                                        <ul>
+                                            <li class="blue"></li>
+                                            <li class="maroon active"></li>
+                                            <li class="gray"></li>
+                                            <li class="green"></li>
+                                            <li class="yellow"></li>
+                                            <li class="white"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pro-details-size">
+                                    <span>Size</span>
+                                    <div class="pro-details-size-content">
+                                        <ul>
+                                            <li><a href="#">s</a></li>
+                                            <li><a href="#">m</a></li>
+                                            <li><a href="#">l</a></li>
+                                            <li><a href="#">xl</a></li>
+                                            <li><a href="#">xxl</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-details-quality">
+                                <div class="cart-plus-minus">
+                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
+                                </div>
+                                <div class="pro-details-cart">
+                                    <a href="#">Add To Cart</a>
+                                </div>
+                                <div class="pro-details-wishlist">
+                                    <a title="Add To Wishlist" href="#"><i class="sli sli-heart"></i></a>
+                                </div>
+                                <div class="pro-details-compare">
+                                    <a title="Add To Compare" href="#"><i class="sli sli-refresh"></i></a>
+                                </div>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>Categories :</span>
+                                <ul>
+                                    <li><a href="#">Minimal,</a></li>
+                                    <li><a href="#">Furniture,</a></li>
+                                    <li><a href="#">Fashion</a></li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>Tag :</span>
+                                <ul>
+                                    <li><a href="#">Fashion, </a></li>
+                                    <li><a href="#">Furniture,</a></li>
+                                    <li><a href="#">Electronic</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end -->
+@endsection
+@section('js')
+<script>
+    $(document).ready(function () {
+                $('.pro-add-to-cart').click(function (e) {
+                    e.preventDefault();
+                    // swal({
+                    //     title: "Good job!",
+                    //     text: "You clicked the button!",
+                    //     icon: "success",
+                    // });
+                    var pro_id = $(this).attr('id-pro');
+                    var url = $(this).attr('url-temp');
+                    // var qty_item = $(this).parents('#parent_1').find('.qty-item').val();
+                    var qty_item = $(".cart-plus-minus-box").val();
+                        // alert(qty_item);
+                    console.log(qty_item);
+                    $.ajax({
+                        type: "post",
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'), '_method': 'patch'},
+                        url: url,
+                        data: {
+                            'pro_id':pro_id,
+                            'pro_qty':qty_item
+                        },
+                        success: function (data) {
+                            $(".top-cart-content").empty();
+                            $(".top-cart-content").html(data);
+                            alertify.success('Thêm vào giỏ hàng thành công !');
+                            // $(".shopping-cart-content").load(location.href + " .shopping-cart-content");
+                            $(".wp-cart-pc").empty();
+                            $(".wp-cart-pc").load(location.href + " .wp-cart-pc");// Add space between URL and selector.
+
+                        }
+                    });
+                });
+
+
+            });
+</script>
+<script src="{{ asset('parlo/assets/js/addCart.js') }}"></script>
+@endsection

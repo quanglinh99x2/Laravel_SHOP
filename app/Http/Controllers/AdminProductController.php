@@ -169,7 +169,7 @@ class AdminProductController extends Controller
             $product_1->category_id = $request->category_id;
             // check empty avatar
             if($request->product_image != null){
-                if($product_1->product_image !='no-name.png'){
+                if($product_1->product_image !='no-image.png'){
                     unlink(public_path( $product_1->product_image_path));
                 }
                 $dataImageFeatureProduct = $this->storageTraitUpload($request,'product_image','product');

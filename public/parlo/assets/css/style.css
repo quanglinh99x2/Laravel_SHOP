@@ -1498,7 +1498,7 @@ textarea:focus {
           .cart-wrap .shopping-cart-content ul li .shopping-cart-img .item-close {
             position: absolute;
             top: 10px;
-            left: 10px;
+            left: 233px;
             opacity: 0;
             visibility: hidden;
             -webkit-transition: all .3s ease 0s;
@@ -1590,6 +1590,9 @@ textarea:focus {
             border: 1px solid #ff3535; }
           .cart-wrap .shopping-cart-content .shopping-cart-bottom .shopping-cart-btn a:last-child {
             margin-bottom: 0; }
+
+
+
 
 .wrapper-cart .body-overlay-2 {
   background-color: transparent;
@@ -3164,7 +3167,11 @@ textarea:focus {
           flex-direction: column;
           list-style: none;
           margin: -5px;
-          padding: 0; }
+          padding: 0;
+          /* background: #fff;
+          border: 1px solid #8e5b5b;
+          border-radius: 14px; */
+        }
           .ht-products .ht-product .ht-product-inner .ht-product-image-wrap .ht-product-action ul li {
             padding: 5px; }
             .ht-products .ht-product .ht-product-inner .ht-product-image-wrap .ht-product-action ul li a {
@@ -3570,7 +3577,8 @@ textarea:focus {
     visibility: hidden;
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s; }
+    transition: all 0.3s ease 0s;
+    background: #f9d46c;}
     .ht-products .ht-product.ht-product-action-on-hover .ht-product-inner .ht-product-image-wrap .ht-product-action ul li:nth-child(2) {
       -webkit-transition: all 0.3s ease 0.2s;
       -o-transition: all 0.3s ease 0.2s;
@@ -5784,7 +5792,7 @@ h3.cart-page-title {
           padding: 21px 20px 22px; } }
   .cart-table-content table tbody > tr {
     border-bottom: 1px solid #ebebeb; }
-    .cart-table-content table tbody > tr td.product-thumbnail {
+    .cart-table-content table tbody > tr td.product-thumbnail a img{
       width: 150px; }
     .cart-table-content table tbody > tr td.product-name {
       width: 435px; }
@@ -7419,3 +7427,7 @@ h3.cart-page-title {
   padding: 20px 0; }
 
 /*-------- Start My Account Page Wrapper --------*/
+.slick-slide img {
+    width: 113px !important;
+
+}

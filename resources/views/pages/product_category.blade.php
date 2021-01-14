@@ -194,3 +194,6 @@
     </div>
 </div>
 @endsection
+@section('js')
+    <script src="{{ asset('parlo/assets/js/addCart.js') }}"></script>
+@endsection

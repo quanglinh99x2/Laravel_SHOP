@@ -120,7 +120,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label>Nội dung</label>
-                                <textarea name="product_content" class="form-control " id="editor1">
+                                <textarea name="product_content" class="form-control " rows ="9" id="editor1">
                                     {{$product->content}}
                                 </textarea>
                             </div>
@@ -141,7 +141,9 @@
     <script src="{{asset("admins/product/add/add.js")}}"></script>
 
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
     <script> CKEDITOR.replace( 'editor1', {
+
             filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
             filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
             filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
@@ -149,5 +151,7 @@
             filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
             filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
         });
+
     </script>
+
 @endsection

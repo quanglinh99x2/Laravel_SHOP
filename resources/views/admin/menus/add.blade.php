@@ -12,13 +12,15 @@
 
                 <div class="row ml-5">
                     <div class="col-md-6">
-                        @if (count($errors) >0)
+                        @if ($errors->any())
                             <div class="alert alert-danger">
-                                @foreach ($errors->all() as $err)
-                                    {{ $err }} <br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
                                 @endforeach
+                            </ul>
                             </div>
-                        @endif
+                            @endif
                         @if (session('notification'))
                             <div class="alert alert-success">
                                 {{ session('notification') }}

@@ -1,20 +1,21 @@
+
 <header class="header-area sticky-bar">
     <div class="main-header-wrap">
         <div class="container">
             <div class="row">
-                <div class="col-xl-2 col-lg-2">
+                <div class="col-xl-1 col-lg-1">
                     <div class="logo pt-40">
                         <a href="{{ route('home.index') }}">
                             <img src="{{ asset('parlo/assets/img/logo/logo.png') }}" alt="">
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-7 col-lg-7 ">
+                <div class="col-xl-8 col-lg-8 ">
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li class="angle-shape"><a href="index.html">Home </a> </li>
-                                <li class="angle-shape"><a href="index.html">Danh mục</a>
+                                <li class="angle-shape"><a href="{{ route('home.index') }}">Home </a> </li>
+                                <li class="angle-shape"><a href="#">Danh mục</a>
                                     <ul class="submenu">
                                         @foreach ($category_parents as $item)
                                             <li><a href="{{ route('category.products',['id'=>$item->id]) }}">{{ $item->name }} </a></li>
@@ -25,11 +26,11 @@
                                 <li class="angle-shape"><a href="shop.html"> Thương hiệu <span>new</span> </a>
                                     <ul class="mega-menu">
                                         @foreach ($trademarks as $trade)
-                                        <li><a class="menu-title" href="#">{{ $trade->name }}</a>
+                                        <li><a class="menu-title" href="{{ route('trademark.products',['id'=>$trade->id]) }}">{{ $trade->name }}</a>
                                             <ul>
                                                 @foreach ($trade->products as $key=>$item)
                                                 <?php if($key ==4){break;} ?>
-                                                    <li><a href="shop.html">{{ $item->name }}</a></li>
+                                                    <li><a href="{{ route('detail.products',['slug'=>$item->slug]) }}">{{ $item->name }}</a></li>
                                                 @endforeach
                                             </ul>
                                         </li>
@@ -38,7 +39,7 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="{{ asset('parlo/contact-us.html') }}"> Contact </a></li>
+                                <li><a href="{{ asset('parlo/contact-us.html') }}"> Liên hệ </a></li>
                                 <li class="angle-shape"><a href="#">Pages </a>
                                     <ul class="submenu">
                                         <li><a href="about-us.html">about us </a></li>
@@ -51,75 +52,44 @@
                                         <li><a href="login-register.html">login/register </a></li>
                                     </ul>
                                 </li>
-                                {{-- <li class="angle-shape"><a href="blog.html"> Blog </a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html">standard style </a></li>
-                                        <li><a href="blog-2-col.html">blog 2 column </a></li>
-                                        <li><a href="blog-3-col.html">blog 3 column </a></li>
-                                        <li><a href="blog-right-sidebar.html">blog right sidebar </a></li>
-                                        <li><a href="blog-details.html">blog details </a></li>
-                                        <li><a href="blog-details-right-sidebar.html">blog details right sidebar </a></li>
-                                    </ul>
-                                </li> --}}
+                                <li><a class="angle-shape" href=""><i class="fa fa-sign-in mr-2" aria-hidden="true"></i><strong>Đăng nhập</strong>
+                                </a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-lg-3">
                     <div class="header-right-wrap pt-40">
                         <div class="header-search">
                             <a class="search-active" href="#"><i class="sli sli-magnifier"></i></a>
                         </div>
-                        <div class="cart-wrap">
+                        <div class="cart-wrap wp-cart-pc">
                             <button class="icon-cart-active">
                                 <span class="icon-cart">
                                     <i class="sli sli-bag"></i>
-                                    <span class="count-style">02</span>
+                                    <span class="count-style">
+                                        <?php
+                                    if(!empty(request()->session()->get('cart'))){
+                                        $totalQty=0;
+                                        foreach(request()->session()->get('cart')->products as $item){
+                                            $totalQty += $item['quantity'];
+                                        }
+                                        echo $totalQty;
+                                    }
+                                    else{
+                                        echo 0;
+                                    }
+                                    ?></span>
                                 </span>
                                 <span class="cart-price">
-                                    $320.00
+                                    @if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @else {{ 0 }} đ @endif
                                 </span>
                             </button>
+                            {{-- wp-cart --}}
                             <div class="shopping-cart-content">
-                                <div class="shopping-cart-top">
-                                    <h4>Shoping Cart</h4>
-                                    <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
-                                </div>
-                                <ul>
-                                    <li class="single-shopping-cart">
-                                        <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="{{ asset('parlo/assets/img/cart/cart-1.jpg') }}"></a>
-                                            <div class="item-close">
-                                                <a href="#"><i class="sli sli-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="#">Product Name </a></h4>
-                                            <span>1 x 90.00</span>
-                                        </div>
-                                    </li>
-                                    <li class="single-shopping-cart">
-                                        <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="{{ asset('parlo/assets/img/cart/cart-2.jpg') }}"></a>
-                                            <div class="item-close">
-                                                <a href="#"><i class="sli sli-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="#">Product Name</a></h4>
-                                            <span>1 x 90.00</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="shopping-cart-bottom">
-                                    <div class="shopping-cart-total">
-                                        <h4>Total : <span class="shop-total">$260.00</span></h4>
-                                    </div>
-                                    <div class="shopping-cart-btn btn-hover text-center">
-                                        <a class="default-btn" href="checkout.html">checkout</a>
-                                        <a class="default-btn" href="cart-page.html">view cart</a>
-                                    </div>
-                                </div>
+                                @include('pages.sub_cart',['newCart'=>request()->session()->get('cart')])
+
                             </div>
                         </div>
                         <div class="setting-wrap">
@@ -189,7 +159,7 @@
                 </div>
                 <div class="col-6">
                     <div class="header-right-wrap">
-                        <div class="cart-wrap">
+                        <div class="cart-wrap wp-cart-mobile">
                             <button class="icon-cart-active">
                                 <span class="icon-cart">
                                     <i class="sli sli-bag"></i>
@@ -199,7 +169,7 @@
                                     $320.00
                                 </span>
                             </button>
-                            <div class="shopping-cart-content">
+                            <div id="card_header_load" class="shopping-cart-content">
                                 <div class="shopping-cart-top">
                                     <h4>Shoping Cart</h4>
                                     <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
@@ -230,7 +200,7 @@
                                     </div>
                                     <div class="shopping-cart-btn btn-hover text-center">
                                         <a class="default-btn" href="checkout.html">checkout</a>
-                                        <a class="default-btn" href="cart-page.html">view cart</a>
+                                        <a class="default-btn" href="{{ route('cart.index') }}">view cart</a>
                                     </div>
                                 </div>
                             </div>

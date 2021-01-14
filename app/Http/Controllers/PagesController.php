@@ -44,14 +44,10 @@ class PagesController extends Controller
     }
     public function product_trademarks($id){
         $trademark = $this->trademark->find($id);
-        $trademarks = $this->trademark->all();
-        $category_parents = $this->category->where("parent_id",0)->get();
-        return view('pages.product_trademark',compact('trademark','category_parents','trademarks'));
+        return view('pages.product_trademark',compact('trademark'));
     }
     public function detail_product($slug){
-        $trademarks = $this->trademark->all();
-        $category_parents = $this->category->where("parent_id",0)->get();
         $product = $this->product->where(['slug'=>$slug])->first();
-        return view('pages.detail',compact('category_parents','trademarks','product'));
+        return view('pages.detail',compact('product'));
     }
 }

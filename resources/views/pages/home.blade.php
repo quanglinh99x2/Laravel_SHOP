@@ -2,6 +2,9 @@
 @section('title')
     <title>Trang chủ</title>
 @endsection
+@section('css')
+
+@endsection
 @section('content')
 
 
@@ -96,20 +99,20 @@
                     <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
                         <div class="ht-product-inner">
                             <div class="ht-product-image-wrap">
-                                <a href="product-details.html" class="ht-product-image"> <img src="{{ asset($item->product_image_path) }}" alt="Universal Product Style"> </a>
+                                <a href="{{ route('detail.products',['slug'=>$item->slug]) }}" class="ht-product-image"> <img src="{{ asset($item->product_image_path) }}" alt="Universal Product Style"> </a>
                                 <div class="ht-product-action">
                                     <ul>
                                         <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
                                         <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
                                         <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                        <li><a id="hdnSession" data-id="{{ $item->id }}" data-value="@Request.RequestContext.HttpContext.Session['cart']" url-temp="{{ route('cart.add_cart_ajax') }}" class="add-to-cart-mt" href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="ht-product-content">
                                 <div class="ht-product-content-inner">
-                                    <div class="ht-product-categories"><a href="#">Chair</a></div>
-                                    <h4 class="ht-product-title"><a href="product-details.html">{{ $item->name}}</a></h4>
+                                <div class="ht-product-categories"><a href="#">Chair</a></div>
+                                    <h4 class="ht-product-title"><a href="{{ route('detail.products',['slug'=>$item->slug]) }}">{{ $item->name}}</a></h4>
                                     <div class="ht-product-price">
                                         <span class="new">{{ number_format($item->price,0,'',',') }}đ</span>
                                         <span class="old">$80.00</span>
@@ -136,7 +139,7 @@
                                         <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
                                         <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
                                         <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                        <li><a data-id="{{ $item->id }}" url-temp="{{ route('cart.add_cart_ajax') }}" class="add-to-cart-mt" href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
                                     </ul>
                                 </div>
                                 <div class="ht-product-countdown-wrap">
@@ -173,7 +176,7 @@
                                     <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
                                     <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
                                     <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                    <li><a data-id="{{ $item->id }}" url-temp="{{ route('cart.add_cart_ajax') }}" class="add-to-cart-mt" href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -206,7 +209,7 @@
                                     <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
                                     <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
                                     <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                    <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                    <li><a data-id="{{ $item->id }}" url-temp="{{ route('cart.add_cart_ajax') }}" class="add-to-cart-mt" href=""><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
                                 </ul>
                             </div>
                             <div class="ht-product-countdown-wrap">
@@ -336,3 +339,7 @@
 </div>
 
  @endsection
+@section('js')
+
+    <script src="{{ asset('parlo/assets/js/addCart.js') }}"></script>
+@endsection

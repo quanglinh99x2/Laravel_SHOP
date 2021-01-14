@@ -196,6 +196,11 @@
                         @csrf
                         <fieldset class="clearfix">
 
+                            @if (session('notification'))
+                                <div class="alert alert-danger">
+                                   {{ session('notification') }}
+                                </div>
+                            @endif
                                 <p class="error errorLogin" style="color:red; font-size:12px ; display:none"></p>
 
                             <p ><span class="fa fa-user"></span><input id="email" type="text" name="email"
