@@ -128,7 +128,12 @@
                 <h4 class="grand-totall-title">Tổng tiền  <span>@if (!empty(request()->session()->get('cart')))
                     {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }}
                   @endif đ</span></h4>
-                <a href="#">Thanh toán</a>
+                <a href="
+                @if(empty(request()->session()->get('id_customer')))
+                    {{ route('login.checkout') }}
+                @else
+                   {{ route('checkout.index') }}
+                @endif">Thanh toán</a>
             </div>
         </div>
     </div>

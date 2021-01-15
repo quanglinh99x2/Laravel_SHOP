@@ -7431,3 +7431,6 @@ h3.cart-page-title {
     width: 113px !important;
 
 }
+.description-review-wrapper img{
+    max-width: 698px;
+}

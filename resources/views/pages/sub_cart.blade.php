@@ -24,7 +24,13 @@
             <h4>Total : <span class="shop-total">@if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @endif</span></h4>
         </div>
         <div class="shopping-cart-btn btn-hover text-center">
-            <a class="default-btn" href="checkout.html">checkout</a>
+            <a class="default-btn" href="
+            @if(empty(request()->session()->get('id_customer')))
+                {{ route('login.checkout') }}
+            @else
+               {{ route('checkout.index') }}
+            @endif
+            ">checkout</a>
             <a class="default-btn" href="{{ route('cart.index') }}">view cart</a>
         </div>
     </div>
@@ -34,7 +40,7 @@
             <h4>Total : <span class="shop-total">0 đ</span></h4>
         </div>
         <div class="shopping-cart-btn btn-hover text-center">
-            <a class="default-btn" href="checkout.html">checkout</a>
+            <a class="default-btn" href="{{ route('login.checkout') }}">checkout</a>
             <a class="default-btn" href="{{ route('cart.index') }}">view cart</a>
         </div>
     </div>

@@ -41,7 +41,7 @@ class Cart{
         $newProduct['price'] = $newProduct['quantity'] * $product->price;
         //cập nhật lại cart
         $this->products[$id] = $newProduct;
-        $this->totalPrice += $newProduct['price'];
+        $this->totalPrice += $product->price * $qty_add;
         $this->totalQuantity+= $qty_add;
     }
     public function DeleteItemCart($id){

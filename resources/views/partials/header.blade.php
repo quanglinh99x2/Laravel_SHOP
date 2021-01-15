@@ -10,7 +10,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-8 col-lg-8 ">
+                <div class="col-xl-9 col-lg-9 ">
                     <div class="main-menu">
                         <nav>
                             <ul>
@@ -44,7 +44,7 @@
                                     <ul class="submenu">
                                         <li><a href="about-us.html">about us </a></li>
                                         <li><a href="cart-page.html">cart page </a></li>
-                                        <li><a href="checkout.html">checkout </a></li>
+                                        <li><a href="{{ route('checkout.index') }}">checkout </a></li>
                                         <li><a href="compare-page.html">compare </a></li>
                                         <li><a href="wishlist.html">wishlist </a></li>
                                         <li><a href="my-account.html">my account </a></li>
@@ -52,14 +52,23 @@
                                         <li><a href="login-register.html">login/register </a></li>
                                     </ul>
                                 </li>
-                                <li><a class="angle-shape" href=""><i class="fa fa-sign-in mr-2" aria-hidden="true"></i><strong>Đăng nhập</strong>
-                                </a></li>
+                                @if (empty(request()->session()->get('id_customer')))
+                                    <li>
+                                        <a class="angle-shape" href="{{ route('login.checkout') }}"><i class="fa fa-sign-in mr-2" aria-hidden="true"></i><strong>Đăng nhập</strong></a>
+                                    </li>
+                                @else
+                                <li class="angle-shape-1">
+                                    <div class="wp-info-acc">
+                                        <a href={{ route('account.customer') }}></i>Xin chào :{{request()->session()->get('username_customer')  }}</a>
+                                    </div>
+                                </li>
+                                @endif
                             </ul>
                         </nav>
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-3">
+                <div class="col-xl-2 col-lg-2">
                     <div class="header-right-wrap pt-40">
                         <div class="header-search">
                             <a class="search-active" href="#"><i class="sli sli-magnifier"></i></a>
@@ -82,9 +91,9 @@
                                     }
                                     ?></span>
                                 </span>
-                                <span class="cart-price">
+                                {{-- <span class="cart-price">
                                     @if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @else {{ 0 }} đ @endif
-                                </span>
+                                </span> --}}
                             </button>
                             {{-- wp-cart --}}
                             <div class="shopping-cart-content">
@@ -199,7 +208,7 @@
                                         <h4>Total : <span class="shop-total">$260.00</span></h4>
                                     </div>
                                     <div class="shopping-cart-btn btn-hover text-center">
-                                        <a class="default-btn" href="checkout.html">checkout</a>
+                                        <a class="default-btn" href="{{ route('checkout.index') }}">checkout</a>
                                         <a class="default-btn" href="{{ route('cart.index') }}">view cart</a>
                                     </div>
                                 </div>

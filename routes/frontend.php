@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// thêm middleware sessionvali để sử dụng được request->session
 Route::group(['middleware' => 'sessionVali'], function () {
 
     Route::get('/','PagesController@index')->name('home.index');
@@ -48,4 +49,29 @@ Route::group(['middleware' => 'sessionVali'], function () {
         'uses'=>'CartController@updateProduct'
     ]);
 
+    //Login-Checkout
+    Route::get('/login-checkout',[
+        'as'=>'login.checkout',
+        'uses'=>'CheckoutController@loginCheckout'
+    ]);
+    Route::post('/register',[
+        'as'=>'register.customer',
+        'uses'=>'CheckoutController@register'
+    ]);
+    Route::get('/checkout',[
+        'as'=>'checkout.index',
+        'uses'=>'CheckoutController@checkout'
+    ])->middleware('loginCustomer');
+    Route::post('/login_customer',[
+        'as'=>'post.login.customer',
+        'uses'=>'CheckoutController@postLogin'
+    ]);
+    Route::get('/logout-customer',[
+        'as'=>'logout.customer',
+        'uses'=>'CheckoutController@logout'
+    ]);
+    Route::get('/my-account',[
+        'as'=>'account.customer',
+        'uses'=>'CheckoutController@infoAccount'
+    ])->middleware('loginCustomer');
 });
