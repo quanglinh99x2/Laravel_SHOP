@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 // thêm middleware sessionvali để sử dụng được request->session
-Route::group(['middleware' => 'sessionVali'], function () {
+Route::group(['middleware' => ['sessionVali','sessionShareView']], function () {
 
     Route::get('/','PagesController@index')->name('home.index');
 
@@ -74,4 +74,9 @@ Route::group(['middleware' => 'sessionVali'], function () {
         'as'=>'account.customer',
         'uses'=>'CheckoutController@infoAccount'
     ])->middleware('loginCustomer');
+    Route::post('/post-order',[
+        'as'=>'post.order',
+        'uses'=>'OrderController@postOrder'
+    ]);
 });
+

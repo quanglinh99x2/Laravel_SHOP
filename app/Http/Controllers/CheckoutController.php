@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Order;
+use App\OrderDetail;
+use App\Shipping;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,9 +14,13 @@ class CheckoutController extends Controller
 {
     //
     private $customer;
-    function __construct(Customer $customer )
+    private $shipping;
+    function __construct(Customer $customer,Shipping $shipping, Order $order,OrderDetail $orderDetail)
     {
         $this->customer = $customer;
+        $this->shipping = $shipping;
+        $this->order = $order;
+        $this->orderDetail = $orderDetail;
     }
     public function loginCheckout(){
         return view('pages.login_register');
@@ -105,4 +112,5 @@ class CheckoutController extends Controller
     public function infoAccount(){
         return view('pages.info_account');
     }
+
 }

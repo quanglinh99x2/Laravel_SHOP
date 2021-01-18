@@ -337,9 +337,25 @@
         </div>
     </div>
 </div>
-
- @endsection
+{{-- dùng bắt sự kiện đặt hàng thành công --}}
+<div id="order-success">
+    @if (session('order_success'))
+        <div class="sucess-order" session = "1"></div>
+    @else
+        <div class="sucess-order" session = "0"></div>
+    @endif
+</div>
+@endsection
 @section('js')
 
     <script src="{{ asset('parlo/assets/js/addCart.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ss = $(".sucess-order").attr('session');
+            if(ss ==1){
+                swal("Hoàn tất!", "Bạn đã đặt hàng thành công!", "success");
+
+            }
+        });
+    </script>
 @endsection

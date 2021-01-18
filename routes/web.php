@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -271,6 +272,7 @@ Route::group(['prefix'=>'/admin','middleware'=>'loginAdmin'],function(){
         ])->middleware('can:delete-trademark');
 
     });
+    Route::get('/order-list',[OrderController::class,'getListOrder'])->name('order_list');
 });
 
 // Route::get('/','PagesController@index);

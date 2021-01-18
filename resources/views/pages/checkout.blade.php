@@ -21,7 +21,7 @@
 <!-- compare main wrapper start -->
 <div class="checkout-main-area pt-70 pb-70">
     <div class="container">
-        <div class="customer-zone mb-20">
+        {{-- <div class="customer-zone mb-20">
             <p class="cart-page-title">Returning customer? <a class="checkout-click1" href="#">Click here to login</a></p>
             <div class="checkout-login-info">
                 <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.</p>
@@ -60,21 +60,31 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="customer-zone mb-20">
-            <p class="cart-page-title">Have a coupon? <a class="checkout-click3" href="#">Click here to enter your code</a></p>
+            <p class="cart-page-title">Bạn có một mã giảm giá? <a class="checkout-click3" href="#">Nhập mã vào đây !</a></p>
             <div class="checkout-login-info3">
                 <form action="#">
                     <input type="text" placeholder="Coupon code">
-                    <input type="submit" value="Apply Coupon">
+                    <input type="submit" value="Nhập mã">
                 </form>
             </div>
         </div>
+        <form action="{{ route('post.order') }}" method="post">
         <div class="checkout-wrap pt-30">
             <div class="row">
                 <div class="col-lg-7">
                     <div class="billing-info-wrap mr-50">
                         <h3>Chi tiết thanh toán (Billing Details)</h3>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <div class="billing-info mb-20">
@@ -103,7 +113,7 @@
                             </div>
                         </div>
 
-                        <div class="different-address open-toggle mt-30">
+                        {{-- <div class="different-address open-toggle mt-30">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="billing-info mb-20">
@@ -174,10 +184,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="additional-info-wrap">
                             <label>Ghi chú</label>
-                            <textarea rows="6" placeholder="Nhập ghi chú thông tin đơn hàng" name="message"></textarea>
+                            <textarea rows="6" placeholder="Nhập ghi chú thông tin đơn hàng" name="note"></textarea>
                         </div>
                     </div>
                 </div>
@@ -202,26 +212,26 @@
                                 </div>
                                 <div class="your-order-info order-subtotal">
                                     <ul>
-                                        <li>Subtotal <span>@if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @endif </span></li>
+                                        <li>Thành tiền<span>@if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @endif </span></li>
                                     </ul>
                                 </div>
                                 <div class="your-order-info order-shipping">
                                     <ul>
-                                        <li>Shipping <p>Enter your full address to see shipping <br>costs. </p></li>
+                                        <li>Phí ship <p>0 đ <br>costs. </p></li>
                                     </ul>
                                 </div>
                                 <div class="your-order-info order-total">
                                     <ul>
-                                        <li>Total <span>@if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @endif</span></li>
+                                        <li>Tổng tiền <span>@if(!empty(request()->session()->get('cart'))) {{ number_format(request()->session()->get('cart')->totalPrice,0,'',',') }} đ @endif</span></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="payment-method">
                                 <div class="pay-top sin-payment">
-                                    <input id="payment_method_1" class="input-radio" type="radio" value="cheque" checked="checked" name="payment_method">
+                                    <input id="payment_method_1" class="input-radio" type="radio" value="1" checked="checked" name="payment_method">
                                     <label for="payment_method_1">Chuyển khoản trực tiếp(Direct Bank Transfer) </label>
                                     <div class="payment-box payment_method_bacs">
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+                                    {{-- <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p> --}}
                                     </div>
                                 </div>
                                 {{-- <div class="pay-top sin-payment">
@@ -232,10 +242,10 @@
                                     </div>
                                 </div> --}}
                                 <div class="pay-top sin-payment">
-                                    <input id="payment-method-3" class="input-radio" type="radio" value="cheque" name="payment_method">
+                                    <input id="payment-method-3" class="input-radio" type="radio" value="2" name="payment_method">
                                     <label for="payment-method-3">Thanh toán khi nhận hàng (Cash on delivery) </label>
                                     <div class="payment-box payment_method_bacs">
-                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+                                    {{-- <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p> --}}
                                     </div>
                                 </div>
                                 {{-- <div class="pay-top sin-payment sin-payment-3">
@@ -248,12 +258,13 @@
                             </div>
                         </div>
                         <div class="Place-order mt-40">
-                            <a href="#">Đặt hàng</a>
+                            <button type="submit">Đặt hàng</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </form>
     </div>
 </div>
 @endsection

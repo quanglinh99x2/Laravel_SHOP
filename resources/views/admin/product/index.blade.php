@@ -39,7 +39,8 @@
                                        aria-label="Search" url-temp="{{ route('product.search') }}">
                             </div>
                             <div class="col-md-1">
-                                <a href="{{ route('product.add') }}" class="btn btn-success float-right m-2">Add</a>
+                                <a href="{{ route('product.add') }}" class="btn btn-success float-right m-2"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                                    Thêm</a>
                             </div>
 
                         </div>
@@ -71,13 +72,14 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>
                                         <a href="{{route('product.edit',['id' => $item->id])}}" class="btn
-                                        btn-default">Sửa</a>
+                                        btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         <a href="{{route
                                         ('product.delete',
                                         ['id' => $item->id])}}"
                                            class="btn_delete
                                          btn
-                                        btn-danger">Xóa</a>
+                                        btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
                                     </td>
                                 </tr>
                             @endforeach
